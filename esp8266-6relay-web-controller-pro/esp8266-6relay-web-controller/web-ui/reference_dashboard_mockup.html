@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Car Dashboard</h1>
+        <p>Temperature: <span id="temperature">25</span>°C</p>
+        <p>Humidity: <span id="humidity">65</span>%</p>
+        <p>Car Air: <span id="carAir">On</span></p>
+
+        <label class="switch">
+            <input type="checkbox" id="airControl">
+            <span class="slider round"></span>
+        </label>
+        <button id="refresh">Refresh</button>
+    </div>
+
+    <script>
+        var temperature = document.getElementById('temperature');
+        var humidity = document.getElementById('humidity');
+        var carAir = document.getElementById('carAir');
+        var airControl = document.getElementById('airControl');
+
+        airControl.addEventListener('change', function() {
+            carAir.textContent = this.checked ? 'On' : 'Off';
+        });
+
+        document.getElementById('refresh').addEventListener('click', function() {
+            // Assuming temperature, humidity, and air conditioning states are randomly generated for the purpose of this demo
+            temperature.textContent = Math.floor(Math.random() * 100);
+            humidity.textContent = Math.floor(Math.random() * 100);
+            airControl.checked = Math.random() >= 0.5;
+            carAir.textContent = airControl.checked ? 'On' : 'Off';
+        });
+    </script>
+</body>
+</html>
